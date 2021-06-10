@@ -28,6 +28,17 @@ class Client:
 					self.ui.register_message(message)
 			sleep(1)
 
+	def history(self):
+		response = requests.post(self.SERVER+'/history', {'pass': self.password})
+		if response.text == 'Ignore':
+			self.ui.logMessage('Server: No messages (', 'blue')
+		else:
+			response = json.loads(response.text)
+
+			for message in response:
+				self.ui.register_message(message)
+				self.ui.logMessage(f'Server: {message}', 'blue')
+
 	def send_data(self, route, message = None):
 		try:
 			self.ui.logMessage(f'Client -> {self.SERVER}{route}', 'dodger blue')
