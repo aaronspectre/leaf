@@ -16,7 +16,7 @@ class ChatUI:
 		#UI
 		self.master = Tk()
 		self.master.title('Leaf')
-		self.master.iconbitmap('icon.ico')
+		# self.master.iconbitmap('icon.ico')
 		self.master.minsize(300, 400)
 		self.master.resizable(FALSE, FALSE)
 
@@ -95,10 +95,9 @@ class ChatUI:
 			elif mes == 'exit':
 				self.bye()
 
-			elif '-port' in mes:
-				mes = int(mes.split('-port')[1])
-				self.client.port = mes
-				self.sendMessage(f'Port changed to {mes}')
+			elif 'history' in mes:
+				self.client.history()
+				self.messageField.delete(0, END)
 
 			elif '-font' in mes:
 				mes = int(mes.split('-font')[1])
@@ -159,7 +158,7 @@ class Authentication:
 	def __init__(self):
 		self.window = Tk()
 		self.window.title('Authentication')
-		self.window.iconbitmap('icon.ico')
+		# self.window.iconbitmap('icon.ico')
 		self.window.minsize(100, 50)
 		self.window.resizable(FALSE, FALSE)
 
